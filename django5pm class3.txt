@@ -1,0 +1,316 @@
+ex8:
+----
+how to write a comments in HTML file?
+
+	ex8.html
+	--------
+<!DOCTYPE html>
+<html>
+<head>
+<title>
+simple webpage
+</title>
+</head>
+<body>
+<!-- h1 is heading tag -->
+<h1>What is python?</h1>
+<!-- h2 is heading tag and 
+     p is paragraph tag -->
+<p><h2>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp python is a general purpose programming language python is a high-level programming language python is a multi-paradigm.</h2></p>
+</body>
+</html>
+
+ex9:
+-----
+how to display the images?
+
+	ex9.html
+	-------
+<!DOCTYPE html>
+<html>
+<head>
+<title>
+simple webpage
+</title>
+</head>
+<body>
+<img src="C:\Users\DELL\Desktop\siva.jpg" alt="myimage"><br>
+<img src="C:\Users\DELL\Desktop\siva.jpg" alt="myimage" 
+align="right" height="100px" width="150px">
+</body>
+</html>
+
+ex10:
+-----
+how to add hyperlinks?
+
+	ex10.html
+	---------
+<!DOCTYPE html>
+<html>
+<head>
+<title>
+simple webpage
+</title>
+</head>
+<body>
+<a href="https://www.google.com">Google</a><br><br>
+<a href="http://www.sivapython.blogspot.com">sivapython</a>
+<br><br>
+<a href="welcome.html">welcome</a>
+</body>
+</html>
+
+	welcome.html
+	------------
+<html>
+<head>
+</head>
+<body>
+<h1>welcome to HTML tutorial </h1>
+</body>
+</html>
+
+
+ex11:
+-----
+to create tables?
+
+	ex11.html
+	----------
+<!DOCTYPE html>
+<html>
+<head>
+<title>
+simple webpage
+</title>
+</head>
+<body>
+<table>
+<tr>
+   <th>Eid</th>
+   <th>Ename</th>
+   <th>Sal</th>
+</tr>
+<tr>
+   <td>101</td>
+   <td>siva</td>
+   <td>2000</td>
+</tr>
+<tr>
+   <td>102</td>
+   <td>rama</td>
+   <td>3000</td>
+</tr>
+<tr>
+   <td>103</td>
+   <td>krishna</td>
+   <td>4000</td>
+</tr>
+</table>
+</body>
+</html>
+
+ex12:
+-----
+create a table with border?
+
+	ex12.html
+	---------
+<!DOCTYPE html>
+<html>
+<head>
+<title>
+simple webpage
+</title>
+</head>
+<body>
+<table border="2">
+<tr>
+   <th>Eid</th>
+   <th>Ename</th>
+   <th>Sal</th>
+</tr>
+<tr>
+   <td>101</td>
+   <td>siva</td>
+   <td>2000</td>
+</tr>
+<tr>
+   <td>102</td>
+   <td>rama</td>
+   <td>3000</td>
+</tr>
+<tr>
+   <td>103</td>
+   <td>krishna</td>
+   <td>4000</td>
+</tr>
+</table>
+</body>
+</html>
+
+ex13:
+-----
+create a table with width attribute?
+
+	ex13.html
+	---------
+<!DOCTYPE html>
+<html>
+<head>
+<title>
+simple webpage
+</title>
+</head>
+<body>
+<table border="2" width="50%">
+<tr>
+   <th>Eid</th>
+   <th>Ename</th>
+   <th>Sal</th>
+</tr>
+<tr>
+   <td>101</td>
+   <td>siva</td>
+   <td>2000</td>
+</tr>
+<tr>
+   <td>102</td>
+   <td>rama</td>
+   <td>3000</td>
+</tr>
+<tr>
+   <td>103</td>
+   <td>krishna</td>
+   <td>4000</td>
+</tr>
+</table>
+</body>
+</html>
+
+ex14:
+-----
+to display the items in orderd list?
+
+	ex14.html
+	--------
+<!DOCTYPE html>
+<html>
+<head>
+<title>
+simple webpage
+</title>
+</head>
+<body>
+<h1>list of Tea's</h1>
+<ol>
+    <li>Normal Tea</li>
+    <li>Lemmon Tea</li>
+    <li>Ginger Tea</li>
+    <li>Special Tea</li>
+    <li>Taz Tea</li>
+</ol>
+<hr>
+<h1>list of Tea's</h1>
+<ol type="i">
+    <li>Normal Tea</li>
+    <li>Lemmon Tea</li>
+    <li>Ginger Tea</li>
+    <li>Special Tea</li>
+    <li>Taz Tea</li>
+</ol>
+<hr>
+<h1>list of Tea's</h1>
+<ol type="I">
+    <li>Normal Tea</li>
+    <li>Lemmon Tea</li>
+    <li>Ginger Tea</li>
+    <li>Special Tea</li>
+    <li>Taz Tea</li>
+</ol>
+<hr>
+<h1>list of Tea's</h1>
+<ol type="a">
+    <li>Normal Tea</li>
+    <li>Lemmon Tea</li>
+    <li>Ginger Tea</li>
+    <li>Special Tea</li>
+    <li>Taz Tea</li>
+</ol>
+<hr>
+<h1>list of Tea's</h1>
+<ol type="A">
+    <li>Normal Tea</li>
+    <li>Lemmon Tea</li>
+    <li>Ginger Tea</li>
+    <li>Special Tea</li>
+    <li>Taz Tea</li>
+</ol>
+</body>
+</html>
+
+ex15:
+-----
+to create unorderd list?
+
+	ex15.html
+	---------
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>
+simple webpage
+</title>
+</head>
+<body>
+<h1>list of Tea's</h1>
+<ul>
+    <li>Normal Tea</li>
+    <li>Lemmon Tea</li>
+    <li>Ginger Tea</li>
+    <li>Special Tea</li>
+    <li>Taz Tea</li>
+</ul>
+<hr>
+<h1>list of Tea's</h1>
+<ul type="square">
+    <li>Normal Tea</li>
+    <li>Lemmon Tea</li>
+    <li>Ginger Tea</li>
+    <li>Special Tea</li>
+    <li>Taz Tea</li>
+</ul>
+<hr>
+<h1>list of Tea's</h1>
+<ul type="disc">
+    <li>Normal Tea</li>
+    <li>Lemmon Tea</li>
+    <li>Ginger Tea</li>
+    <li>Special Tea</li>
+    <li>Taz Tea</li>
+</ul>
+<hr>
+<h1>list of Tea's</h1>
+<ul type="none">
+    <li>Normal Tea</li>
+    <li>Lemmon Tea</li>
+    <li>Ginger Tea</li>
+    <li>Special Tea</li>
+    <li>Taz Tea</li>
+</ul>
+<hr>
+<h1>list of Tea's</h1>
+<ul type="circle">
+    <li>Normal Tea</li>
+    <li>Lemmon Tea</li>
+    <li>Ginger Tea</li>
+    <li>Special Tea</li>
+    <li>Taz Tea</li>
+</ul>
+</body>
+</html>
+
+
+

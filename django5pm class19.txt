@@ -1,0 +1,272 @@
+ex:
+----
+to create a django project by using extends template tag?
+
+step1:
+-----
+to create a project
+
+	django-admin startproject proj16
+
+step2:
+------
+goto project location and to create an application in that project location.
+
+	cd proj16
+
+	python manage.py startapp app16
+
+
+step3:
+-----
+to install our application in settings.py file of the project.
+
+	settings.py
+	-----------
+INSTALLED_APPS = [
+    
+    'app16'
+]
+
+
+step4:
+-----
+to  create a templates and to set the path for our templates in settings.py file.
+
+	settings.py
+	-----------
+TEMPLATES = [
+    {
+        
+        'DIRS': [os.path.join(BASE_DIR,'templates')],
+       
+    },
+]
+
+
+step5:
+-----
+to create a views in views.py file of the application
+
+	views.py
+	-------
+from django.shortcuts import render
+
+# Create your views here.
+def welcome(request):
+    return render(request,'blog.html')
+
+
+	base.html
+	--------
+<html>
+  <head>
+  </head>
+
+  <body>
+        {% block content %}
+        {% endblock %}
+   </body>
+</html>
+
+
+	blog.html
+	---------
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>What is Django</h1>
+    <p>Django is a python related high level web application framework</p>
+{% endblock %}
+
+
+step6:
+------
+to configure the url patterns for views in urls.py file
+
+	urls.py
+	-------
+from django.contrib import admin
+from django.urls import path
+from app16 import views
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('wel/',views.welcome)
+]
+
+step7:
+-----
+to apply the migrate
+
+	python manage.py migrate
+
+
+step8:
+-----
+to start the server
+
+	python manage.py runserver
+
+step9:
+------
+to send the request to the server
+
+	http://127.0.0.1:8000/wel
+
+structure:
+----------
+	proj16
+	   |--->app16
+	   |      |--->views.py
+	   |--->proj16
+	   |      |--->settings.py
+	   |      |--->urls.py
+	   |--->templates
+	   |      |--->blog.html
+	   |      |--->base.html
+	   |--->manage.py
+
+
+
+
+
+
+ex:
+----
+to create a django project by using extends template tag?
+
+
+step1:
+-----
+to create a project
+
+	django-admin startproject proj17
+
+step2:
+------
+goto project location and to create an application in that project location.
+
+	cd proj17
+
+	python manage.py startapp app17
+
+
+step3:
+-----
+to install our application in settings.py file of the project.
+
+	settings.py
+	-----------
+INSTALLED_APPS = [
+    
+    'app17'
+]
+
+
+step4:
+-----
+to  create a templates and to set the path for our templates in settings.py file.
+
+	settings.py
+	-----------
+TEMPLATES = [
+    {
+        
+        'DIRS': [os.path.join(BASE_DIR,'templates')],
+       
+    },
+]
+
+
+step5:
+-----
+to create a views in views.py file of the application
+
+	views.py
+	-------
+from django.shortcuts import render
+
+# Create your views here.
+def welcome(request):
+    return render(request,'base.html')
+
+
+	base.html
+	--------
+<!DOCTYPE html>
+<html>
+<body bgcolor="powderblue">
+{% include "blog.html" %}
+<h1>welcome to my official Django website</h1>
+</body>
+</html>
+
+	blog.html
+	---------
+<nav>
+<a href="http://www.sivapython.blogspot.in">blog</a>
+<a href="contact.html">ContactUs</a>
+<a href=#>Mission</a>
+<a href=#>Vission</a>
+</nav>
+
+	contact.html
+	------------
+<body bgcolor="red">
+<address>
+<h3>Iglobal Technologies</h3>
+<h3>Annapurna block</h3>
+<h3>Ameerpet</h3>
+<h3>Hyderabad</h3>
+</address>
+</body>
+
+step6:
+------
+to configure the url patterns for views in urls.py file
+
+	urls.py
+	-------
+from django.contrib import admin
+from django.urls import path
+from app17 import views
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('wel/',views.welcome)
+    
+]
+
+step7:
+-----
+to apply the migrate
+
+	python manage.py migrate
+
+
+step8:
+-----
+to start the server
+
+	python manage.py runserver
+
+step9:
+------
+to send the request to the server
+
+	http://127.0.0.1:8000/wel
+
+structure:
+----------
+	proj17
+	   |--->app17
+	   |      |--->views.py
+	   |--->proj17
+	   |      |--->settings.py
+	   |      |--->urls.py
+	   |--->templates
+	   |      |--->blog.html
+	   |      |--->base.html
+	   |      |--->contact.html
+	   |--->manage.py
+

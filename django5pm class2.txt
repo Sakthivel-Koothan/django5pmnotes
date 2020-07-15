@@ -1,0 +1,215 @@
+client side technologies
+-------------------------
+	these technologies are used to build the webpages and to perform client side validations.
+
+	we can take any webpage,that webpage contains mainly three things,they are
+
+	structure	--> HTML
+
+	style		--> CSS
+
+	interactivity	--> JAVA SCRIPT
+
+what is HTML?
+------------
+	HTML(Hyper Text Markup Language) is a markup language,it is used to build the webpages.
+
+	it provides structure of the webpages
+
+	the latest HTML version is HTML5
+
+	HTML contains elements,whenever we are representing html elements with in angular brackets (<>),is known as html tag.
+
+	<element>		--> opening tag
+
+	</element>		--> closeing tag
+
+
+	we can implement the html code,dont required any external softwares,just we need required editors(notepad,notepad++,editplus,...) ans browsers(chrome,firefox,opera,IE,safari,..).
+
+	we can save the html file,by using .html/.htm extension
+
+structure of the html:
+---------------------
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>   
+    </title>
+  </head>
+
+  <body>
+  </body>
+</html>	
+
+
+note:
+-----
+html is a case-insensitive
+
+ex1:
+----
+create a simple webpage?
+
+	ex1.html
+	--------
+<!DOCTYPE html>
+<html>
+<head>
+<title>
+simple webpage
+</title>
+</head>
+<body>
+</body>
+</html>
+
+ex2:
+-----
+create a simple webpage to display the "hello world"?
+
+	ex2.html
+	---------
+<!DOCTYPE html>
+<html>
+<head>
+<title>
+simple webpage
+</title>
+</head>
+<body>
+hello world
+</body>
+</html>
+
+ex3:
+----
+create a webpage to display "hello world" by using heading tags?
+
+	ex3.html
+	--------
+<!DOCTYPE html>
+<html>
+<head>
+<title>
+simple webpage
+</title>
+</head>
+<body>
+<h1>hello world</h1>
+<h2>hello world</h2>
+<h3>hello world</h3>
+<h4>hello world</h4>
+<h5>hello world</h5>
+<h6>hello world</h6>
+</body>
+</html>
+
+ex4:
+-----
+to create webpage with paragraph?
+
+	ex4.html
+	--------
+<!DOCTYPE html>
+<html>
+<head>
+<title>
+simple webpage
+</title>
+</head>
+<body>
+<h2>python is a general purpose,high-level,interpreted,interactive,modular,dynamic typed,procedure oriented,object oriented and scripting programming language.Django is a python realeted web application framework,it makes easier to build the better web applications with less code and more quickly.</h2>
+
+<h2><p>python is a general purpose,high-level,interpreted,interactive,modular,dynamic typed,procedure oriented,object oriented and scripting programming language.</p><p>Django is a python realeted web application framework,it makes easier to build the better web applications with less code and more quickly.</p></h2>
+
+</body>
+</html>
+
+
+ex5:
+----
+create a webpage with horizontal ruler?
+
+	ex5.html
+	--------
+<!DOCTYPE html>
+<html>
+<head>
+<title>
+simple webpage
+</title>
+</head>
+<body>
+<h2>python is a general purpose programming language.
+<hr>
+python is a high-level programming language.
+<hr>
+python is a multi-paradigm.
+<hr>
+</h2>
+</body>
+</html>
+
+ex6:
+-----
+	ex6.html
+	--------
+<!DOCTYPE html>
+<html>
+<head>
+<title>
+simple webpage
+</title>
+</head>
+<body>
+<b>python is a <u>general purpose</u> programming language.</b>
+<hr>
+<i>python is a <u>high-level</u> programming language.</i>
+<hr>
+<strike>python is a multi-paradigm</strike>
+<hr>
+</body>
+</html>
+
+ex7:
+----
+to break the lines
+
+	ex7.html
+	-------
+<!DOCTYPE html>
+<html>
+<head>
+<title>
+simple webpage
+</title>
+</head>
+<body>
+<h2>python is a general purpose programming language <br>python is a high-level programming language<br>python is a multi-paradigm</h2>
+<hr>
+<h2>python is a general purpose programming language python is a high-level programming language python is a multi-paradigm</h2>
+</body>
+</html>
+
+ex8:
+----
+we can spaces on the webpage?
+
+	ex8.html
+	--------
+<!DOCTYPE html>
+<html>
+<head>
+<title>
+simple webpage
+</title>
+</head>
+<body>
+<h1>What is python?</h1>
+<p><h2>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp python is a general purpose programming language python is a high-level programming language python is a multi-paradigm.</h2></p>
+</body>
+</html>
+
+
+

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+function armstr()
+{
+var s=0,num,temp,dig;
+num=Number(document.getElementById("no_input").value);
+
+temp=num;
+while(temp>0)
+{
+dig=temp%10;
+s=s+a*a*a;
+temp=parseInt(temp/10); // convert float into Integer
+}
+if(s==num)
+{
+alert("Armstrong number");
+}
+else
+{
+alert("Not Armstrong number");
+}
+}
+
+</script>
+</head>
+<body>
+Enter any Number: <input id="no_input">
+<button onclick="armstr()">Check</button></br></br>
+</body>
+</html>

@@ -1,0 +1,233 @@
+	uploading images/files:
+	-----------------------
+step1:
+------
+to create a project
+
+	django-admin startproject proj25
+
+step2:
+-----
+goto project location and create an application
+
+	cd proj25
+	
+	python manage.py startapp app25
+
+step3:
+------
+to install our application in settings.py file
+
+	settings.py
+	----------
+INSTALLED_APPS = [
+    
+    'app25'
+]
+
+step4:
+-----
+to create a templates and set the path for templates into settings.py file of the project
+
+	settings.py
+	-----------
+TEMPLATES = [
+    {
+        
+        'DIRS': [os.path.join(BASE_DIR,'templates')],
+        
+    },
+]
+
+step5:
+------
+to create media folder in our project location after to set the path our media files in settings.py file
+
+	settings.py
+	------------
+#uploading files
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = 'media/'
+
+step6:
+-----
+	to create a model in our models.py file of the application
+
+	models.py
+	---------
+from django.db import models
+class User_Profile(models.Model):
+    fname = models.CharField(max_length=200)
+    lname = models.CharField(max_length = 200)
+    technologies = models.CharField(max_length=500)
+    email = models.EmailField(default = None)
+    display_picture = models.FileField()
+    def __str__(self):
+        return self.fname
+
+step7:
+----
+	to check the errors in our model
+
+python manage.py check
+
+step8:
+------
+	to apply the make migrations
+
+	python manage.py makemigrations
+
+step9:
+-----
+	to apply the migrate
+
+	python manage.py migrate
+
+step10:
+-------
+	to create form for our model to insert the data to the database.
+
+	forms.py
+	--------
+from django import forms
+from .models import User_Profile
+
+class Profile_Form(forms.ModelForm):
+    class Meta:
+        model = User_Profile
+        fields = [
+        'fname',
+        'lname',
+        'technologies',
+        'email',
+        'display_picture'
+        ]
+
+step11:
+-------
+to create a view in views.py file of the application
+
+	views.py
+	------
+from django.shortcuts import render
+from .forms import Profile_Form
+from .models import User_Profile
+IMAGE_FILE_TYPES = ['png', 'jpg', 'jpeg']
+def create_profile(request):
+    form = Profile_Form()
+    if request.method == 'POST':
+        form = Profile_Form(request.POST, request.FILES)
+        if form.is_valid():
+            user_pr = form.save(commit=False)
+            user_pr.display_picture = request.FILES['display_picture']
+            file_type = user_pr.display_picture.url.split('.')[-1]
+            file_type = file_type.lower()
+            if file_type not in IMAGE_FILE_TYPES:
+                return render(request, 'profile_maker/error.html')
+            user_pr.save()
+            return render(request, 'profile_maker/details.html',
+                          {'user_pr': user_pr})
+    context = {"form": form,}
+    return render(request, 'profile_maker/create.html', context)
+
+
+	profile_maker/create.html
+	------------------------
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Make Profile</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    </head>
+    <body>
+        <center>
+            <div class="jumbotron">
+                <h1 class="display-4">sivakrishna Django File Uploading project</h1>
+                        {% block replace %}
+                <p class="lead">To make a user profile and upload the files fill this form</p>
+                <hr class="my-4">
+                <form method="POST" enctype="multipart/form-data">
+                    <!-- Very Important csrf Token -->
+                    {% csrf_token %}
+                    <table>
+                        {{ form.as_table }}
+                    </table>
+                    <input type="submit" class="btn btn-primary btn-lg" name="register">
+            </div>
+        </center>
+        {% endblock %}
+    </body>
+</html>
+
+
+	profile_maker/error.html
+	-------------------------
+
+{% extends 'profile_maker/create.html' %}
+{% block replace %}
+<CENTER>
+    <h1 style = 'border: 5px red solid;'> hello, you have uploaded the wrong file type.</h1>
+</CENTER>
+{% endblock %}
+
+
+	profile_maker/details.html
+	--------------------------
+{% extends 'profile_maker/create.html' %}
+{% block replace %}
+<CENTER>
+<div class="jumbotron">
+  <h1 class="display-4">Welcome to Sivakrishna Django tutorial<br>Hello {{ user_pr.fname }}</h1>
+  <p class="lead">its an awesome profile picture</p>
+  <hr class="my-4">
+  <img src="{{ user_pr.display_picture.url }}" class="image_responsive" height="100px" width="100px">
+  <p>
+    {{ user_pr.display_picture.url }}<BR>
+   You have learned some awesome technologies like {{ user_pr.technologies }}</p>
+</div>
+</CENTER>
+{% endblock %}
+
+step12:
+------
+to configure url patterns for our views in urls.py file
+
+	app31/urls.py
+	-------------
+from django.urls import path
+from . import views
+from proj31 import settings
+from django.conf.urls.static import static
+urlpatterns = [
+    path('', views.create_profile, name = 'create'),
+]
+if settings.DEBUG:
+    '''urlpatterns += static(settings.STATIC_URL,
+                          document_root = settings.STATIC_ROOT)'''
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root = settings.MEDIA_ROOT)
+
+
+
+	proj31/urls.py
+	--------------
+from django.contrib import admin
+from django.urls import path, include
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('upload/', include('app31.urls')),
+]
+
+step13:
+------
+to start the server
+
+	python manage.py runserver
+
+step14:
+-----
+to send the request to the server
+
+	http://127.0.0.1:8000/upload
+
+		

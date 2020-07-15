@@ -1,0 +1,17 @@
+how to uploading our projects into github?
+-------------------------------------------
+git init
+
+git add -A
+
+git commit -m 'Added my project'
+
+git remote add origin https://github.com/divyakola/mdemoyproject.git
+
+git push -u -f origin master
+
+
+
+https://github.com/divyakola/librarymanagementproject.git
+
+https://github.com/divyakola/onlinefooddelivary.git

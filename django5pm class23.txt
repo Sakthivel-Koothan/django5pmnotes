@@ -1,0 +1,201 @@
+example:
+---------
+create django project to perform curd operations.
+
+step1:
+-----
+to create a project
+
+	django-admin startproject proj19
+
+step2:
+-----
+goto project location and create an application in that project
+
+	cd projectname
+
+	python manage.py startapp app19
+
+step3:
+-----
+to install our application in settings.py file of the project
+
+	settings.py
+	-----------
+INSTALLED_APPS = [
+    
+    'app19'
+]
+
+step4:
+-----
+to create a model in models.py file of the application
+
+	models.py
+	----------
+from django.db import models
+
+# Create your models here.
+class product(models.Model):
+    pid=models.IntegerField(primary_key=True)
+    pname=models.CharField(max_length=30)
+    pcost=models.DecimalField(max_digits=7,decimal_places=2)
+    pmfdt=models.DateField()
+    pexpdt=models.DateField()
+
+step5:
+-----
+to check the errors in our model
+
+	python manage.py check   
+
+step6:
+-----
+to apply the makemigrations
+
+	python manage.py makemigrations
+
+step7:
+-----
+to create a templates and set the path for our templates in settings.py file of the project.
+
+	settings.py
+	-----------
+TEMPLATES = [
+    {
+        
+        'DIRS': [os.path.join(BASE_DIR,'templates')],
+      },
+]
+
+
+step8:
+-----
+to create a views in views.py file of the application
+		
+	views.py
+	---------
+from django.shortcuts import render
+from .models import product
+from django.http import HttpResponse
+# Create your views here.
+def product_input(request):
+    return render(request,'input.html')
+def product_insert(request):
+    pid1=int(request.GET['p1'])
+    pname1=request.GET['p2']
+    pcost1=float(request.GET['p3'])
+    pmfdt1=request.GET['p4']
+    pexpdt1=request.GET['p5']
+    p=product(pid=pid1,pname=pname1,pcost=pcost1,pmfdt=pmfdt1,pexpdt=pexpdt1)
+    p.save()
+    return HttpResponse("Product Inserted Successfully")
+def product_info(request):
+    records=product.objects.all()
+    return render(request,'output.html',{'rec':records})
+    
+    
+
+	input.html
+	----------
+<!DOCTYPE html>
+<html>
+<body bgcolor="powderblue">
+<form action="insert">
+Enter ProductId:<input type="text" name="p1"><br>
+Enter ProductName:<input type="text" name="p2"><br>
+Enter ProductCost:<input type="text" name="p3"><br>
+Enter ProductMFdate:<input type="text" name="p4"><br>
+Enter ProductEXPdate:<input type="text" name="p5"><br>
+<input type="submit" value="add">
+</form>
+</body>
+</html>
+
+	output.html
+	------------
+<!DOCTYPE html>
+<body>
+<table border="2">
+<tr>
+<th>Pid</th>
+<th>Pname</th>
+<th>Pcost></th>
+<th>Pmfdt</th>
+<th>Pexpdt</th>
+</tr>
+{% for r in rec %}
+<tr>
+<td>{{r.pid}}</td>
+<td>{{r.pname}}</td>
+<td>{{r.pcost}}</td>
+<td>{{r.pmfdt}}</td>
+<td>{{r.pexpdt}}</td>
+</tr>
+{% endfor %}
+</table>
+</body>
+</html>
+
+
+step10:
+------
+	to confugure the urls patterns for views in urls.py file
+
+	urls.py
+	-------
+from django.contrib import admin
+from django.urls import path
+from app19 import views
+from django.conf.urls import url
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('in/',views.product_input),
+    url(r'insert',views.product_insert),
+    path('out/',views.product_info)
+]
+
+
+step11:
+------
+to start the server
+
+	python manage.py runserver
+
+step12:
+------
+to send the request
+
+	http://127.0.0.1:8000/in
+
+	http://127.0.0.1:8000/out
+
+
+updated output.html
+	-----------
+<!DOCTYPE html>
+<body bgcolor="powderblue">
+<center>
+<table border="2" bgcolor="red" cellpadding="20">
+<tr bgcolor="blue" align="middle" valign="middle"><th colspan="5">Product Information</th></tr>
+<tr bgcolor="yellow">
+<th>Pid</th>
+<th>Pname</th>
+<th>Pcost</th>
+<th>Pmfdt</th>
+<th>Pexpdt</th>
+</tr>
+{% for r in rec %}
+<tr>
+<td>{{r.pid}}</td>
+<td>{{r.pname}}</td>
+<td>{{r.pcost}}</td>
+<td>{{r.pmfdt}}</td>
+<td>{{r.pexpdt}}</td>
+</tr>
+{% endfor %}
+</table>
+</center>
+</body>
+</html>
+

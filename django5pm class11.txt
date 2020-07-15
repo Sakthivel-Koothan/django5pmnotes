@@ -1,0 +1,204 @@
+ex:
+---
+to create django project with multiple applications?
+
+step1:
+------
+to create a project
+
+	django-admin startproject projectname
+
+(myvenv) F:\django5pm>django-admin startproject proj5
+
+step2:
+-----
+goto project location and create an application in that project location.
+
+	cd projectname
+
+	python manage.py startapp appname
+
+(myvenv) F:\django5pm>cd proj5
+
+(myvenv) F:\django5pm\proj5>python manage.py startapp wishesapp
+
+(myvenv) F:\django5pm\proj5>python manage.py startapp timeapp
+
+step3:
+-----
+to install our applications into settings.py file of the project.
+
+	settings.py
+	-----------
+INSTALLED_APPS = [
+    
+    'wishesapp',
+    'timeapp'
+]
+
+step4:
+-----
+to create a views in views.py file of the applications
+
+	wishesapp/views.py
+	-------------------
+from django.shortcuts import render
+from django.http import HttpResponse
+# Create your views here.
+def morning(request):
+    return HttpResponse("<h1>Good Morning Siva</h1>")
+
+def afternoon(request):
+    return HttpResponse("<h1>Good Afternoon Siva</h1>")
+
+def evening(request):
+    return HttpResponse("<h1>Good Evening Siva</h1>")
+
+def night(request):
+    return HttpResponse("<h1>Good Night Siva</h1>")
+
+
+	timeapp/views.py
+	----------------
+from django.shortcuts import render
+from django.http import HttpResponse
+from datetime import datetime
+
+# Create your views here.
+def dateandtime(request):
+    now=datetime.now()
+    return HttpResponse("<h1>the current system Date and time is:"+str(now)+"</h1>")
+
+step5:
+------
+to configure the url patterns for our views in urls.py file
+
+	urls.py
+	-------
+from django.contrib import admin
+from django.urls import path
+from wishesapp import views
+from timeapp import views
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('gm/',views.morning),
+    path('ga/',views.afternoon),
+    path('ge/',views.evening),
+    path('gn/',views.night),
+    path('dt/',views.dateandtime)
+]
+
+step6:
+------
+to apply the migrate
+
+	python manage.py migrate
+
+error:
+------
+AttributeError: module 'timeapp.views' has no attribute 'morning'
+
+note:
+----
+whenever we are importing multiple modules with samename,in that case django framework to recognize the recent(latest) imported module only.
+
+how to handle this situation?
+----------------------------
+	we can handle this situation in three ways
+
+type1:
+------
+renameing a module
+
+	urls.py
+	-------
+from django.contrib import admin
+from django.urls import path
+import wishesapp.views as w1
+import timeapp.views as t1
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('gm/',w1.morning),
+    path('ga/',w1.afternoon),
+    path('ge/',w1.evening),
+    path('gn/',w1.night),
+    path('dt/',t1.dateandtime)
+]
+
+type2:
+-----
+	urls.py
+	-------
+from django.contrib import admin
+from django.urls import path
+from wishesapp.views import morning,afternoon,evening,night
+from timeapp.views import dateandtime
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('gm/',morning),
+    path('ga/',afternoon),
+    path('ge/',evening),
+    path('gn/',night),
+    path('dt/',dateandtime)
+]
+
+type3:
+------
+including another URLconf
+
+	wishesapp/urls.py
+	------------------
+from django.urls import path
+from . import views
+urlpatterns=[
+    path('gm/',views.morning),
+    path('ga/',views.afternoon),
+    path('ge/',views.evening),
+    path('gn/',views.night)
+]
+
+
+	timeapp/urls.py
+	---------------
+from django.urls import path
+from . import views
+urlpatterns=[
+    path('dt/',views.dateandtime)
+    ]
+
+
+	proj5/urls.py
+	--------------
+from django.contrib import admin
+from django.urls import path
+from django.conf import include
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('wishes/',include('wishesapp.urls')),
+    path('time/',include('timeapp.urls')),
+]
+
+
+
+after update the urls.py file,next we can apply the migrate
+
+	python maange.py migrate
+
+step7:
+-----
+to start the server
+	
+	python manage.py runserver
+
+step8:
+-----
+to send the request
+
+	htpp://127.0.0.1:8000/gm
+
+	http://127.0.0.1:8000/dt
+

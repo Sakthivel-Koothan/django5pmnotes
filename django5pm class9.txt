@@ -1,0 +1,118 @@
+how to start the server?
+------------------------
+	we can start the server by using following syntax,
+
+	python manage.py runserver
+
+how to send request?
+--------------------
+	http://127.0.0.1:8000/urlname
+
+		or
+
+	http://localhost:8000/urlname
+
+how to stop the server?
+------------------------
+	we can stop the server through the commandprompt by using "ctrl+c"
+
+how to change the portnumber?
+-----------------------------
+	we can change the port number by using following syntax,
+
+	python manage.py runserver portnumber
+
+ex1:
+----
+create a django project to print hello world on the webpage?
+
+step1:
+------
+to create a project
+
+	django-admin startproject projectname
+
+(myvenv) F:\django5pm>django-admin startproject proj2
+
+step2:
+------
+goto project location and create an application in the project location
+
+	cd projectname
+
+	python manage.py startapp appname
+
+
+(myvenv) F:\django5pm>cd proj2
+
+(myvenv) F:\django5pm\proj2>python manage.py startapp app2
+
+step3:
+-----
+to install our application in settings.py file of the project.
+
+	settings.py
+	-----------
+INSTALLED_APPS = [
+    
+    'app2'
+]
+
+
+step4:
+------
+to create a view in views.py file of the application
+
+	views.py
+	--------
+from django.shortcuts import render
+from django.http import HttpResponse
+# Create your views here.
+def welcome(request):
+    return HttpResponse("hello world")
+
+
+step5:
+-----
+to configure the url patterns for our views in urls.py file of the project
+
+	urls.py
+	-------
+from django.contrib import admin
+from django.urls import path
+from app2 import views
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('wel/',views.welcome)
+]
+
+step6:
+------
+to apply the migrate for builtin applications
+
+	python manage.py migrate
+
+step7:
+-----
+to start the server
+	python manage.py runserver
+
+step8:
+-----
+to send the request to the server
+
+	http://127.0.0.1:8000/wel
+
+structure:
+-----------
+	proj2
+	   |--->app2
+	   |      |--->views.py
+	   |--->proj2
+	   |      |--->settings.py
+	   |	  |--->urls.py
+	   |--->manage.py
+
+
+	
+

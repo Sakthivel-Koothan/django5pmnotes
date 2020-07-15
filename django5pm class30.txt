@@ -1,0 +1,322 @@
+ex:
+----
+to access the templates and static files from outside the base directory of the project?
+
+step1:
+------
+to create a project
+
+	django-admin startproject proj29
+
+step2:
+------
+goto project location,in that location we are creating an application.
+
+	cd proj29
+
+	python manage.py startapp app29
+
+step3:
+-----
+to install our application in settings.py file of the project
+
+	settings.py
+	------------
+INSTALLED_APPS = [
+    
+    'app29'
+]
+
+
+step4:
+----
+to create a templates and set the path for our templates in settings.py file of the project.
+
+	settings.py
+	-----------
+TEMPLATES = [
+    {
+        
+        'DIRS': [os.path.join(BASE_DIR,
+                   'C:\\Users\\DELL\\Desktop\\templates')],
+      },
+]
+
+step5:
+-----
+to create a static files and set the path for our static files in settings.py file of the project
+
+	settings.py
+	-----------
+STATIC_URL = '/static/'
+STATICFILES_DIRS=[
+    os.path.join(BASE_DIR,'C:\\Users\\DELL\\Desktop\\static'),
+    ]
+
+step6:
+-----
+to create a view in views.py file of the application
+
+	views.py
+	---------
+from django.shortcuts import render
+
+# Create your views here.
+def welcome(request):
+    return render(request,'input.html')
+
+	input.html
+	----------
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+<link rel="stylesheet" href="{% static 'base.css' %}">
+</head>
+<body>
+<h1>welcome to Django Tutorial</h1>
+<p>Django is a python related high-level web application framework,it makes easier to build better web applications more quickly with lesscode</p>
+</body>
+</html>
+
+	base.css
+	--------
+body{
+   background-image:url("https://images.unsplash.com/photo-1594121816049-9b5713c9c1df?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60");
+   background-size:cover;
+   background-repeat:no-repeat;
+  }
+
+h1{
+  text-align:center;
+  color:blue;
+  font-size:30px;
+ }
+
+
+
+step7:
+-----
+to configure the url patterns for our views in urls.py file
+
+	urls.py
+	---------
+from django.contrib import admin
+from django.urls import path
+from app29 import views
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('wel/',views.welcome)
+]
+
+step8:
+------
+to apply the migrate
+
+	python manage.py migrate
+
+step9:
+-----
+to run the server
+
+	python manage.py runserver
+
+step10:
+------
+to send the request to the server
+
+	http://127.0.0.1:8000/wel
+
+
+ex:
+---
+working with static csv files?
+
+step1:
+------
+to create a project
+
+	django-admin startproject proj30
+
+step2:
+------
+goto project location,in that location we are creating an application.
+
+	cd proj30
+
+	python manage.py startapp app30
+
+step3:
+-----
+to install our application in settings.py file of the project
+
+	settings.py
+	------------
+INSTALLED_APPS = [
+    
+    'app30'
+]
+
+step4:
+-----
+to create a view in views.py file
+
+	views.py
+	--------
+from django.shortcuts import render
+from django.http import HttpResponse
+# Create your views here.
+import csv  
+  
+def getfile(request):  
+    response = HttpResponse(content_type='text/csv')  
+    response['Content-Disposition'] = 'attachment; filename="file1.csv"'  
+    writer = csv.writer(response)  
+    writer.writerow(['1001', 'siva', 'krishna', 'B.Tech'])  
+    writer.writerow(['1002', 'bala', 'krishna', 'MCA'])  
+    return response  
+
+
+step5:
+-----
+to configure the url pattern for our view in urls.py file
+
+	urls.py
+	-------
+from django.contrib import admin
+from django.urls import path
+from app30 import views
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('mycsv/',views.getfile)
+]
+
+step6:
+-----
+to apply the migrate
+
+	python manage.py migrate
+
+step7:
+-----
+to run the server
+
+	python manage.py runserver
+
+step8:
+-----
+to send the request
+
+	http://127.0.0.1:8000/mycsv
+
+
+
+ex:
+-----
+working with dynamic csv?
+
+
+step1:
+------
+to create a project
+
+	django-admin startproject proj31
+
+step2:
+------
+goto project location,in that location we are creating an application.
+
+	cd proj31
+
+	python manage.py startapp app31
+
+step3:
+-----
+to install our application in settings.py file of the project
+
+	settings.py
+	------------
+INSTALLED_APPS = [
+    
+    'app31'
+]
+
+step4:
+-----
+to create a model in models.py file of the application
+
+	models.py
+	--------
+from django.db import models
+
+# Create your models here.
+class Employee(models.Model):
+    eid=models.IntegerField(primary_key=True)
+    ename=models.CharField(max_length=20)
+    econtact=models.IntegerField()
+
+step5:
+-----
+to check the errors in our model
+
+	python manage.py check
+
+step6:
+-----
+to generate sql queries for our model
+
+	python manage.py makemigrations
+
+step7:
+----
+to execute sql queries
+
+	python manage.py migrate
+
+step8:
+------
+to create a view ib views.py file of the application
+
+	views.py
+	--------
+	
+from django.shortcuts import render
+from django.http import HttpResponse
+from app31.models import Employee
+import csv  
+def getfile(request):  
+    response = HttpResponse(content_type='text/csv')  
+    response['Content-Disposition'] = 'attachment; filename="file2.csv"'  
+    employees = Employee.objects.all()  
+    writer = csv.writer(response)  
+    for employee in employees:  
+        writer.writerow([employee.eid,employee.ename,employee.econtact])  
+    return response  
+
+step9:
+-----
+to configure the url patterns for our views in urls.py file
+
+	urls.py
+	-------
+from django.contrib import admin
+from django.urls import path
+from app31 import views
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('dcsv/',views.getfile)
+]
+
+step10:
+-----
+to start the server
+
+	python manage.py runserver
+
+step11:
+------
+to send request to the server
+
+	http://127.0.0.1:8000/dcsv

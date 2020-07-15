@@ -1,0 +1,233 @@
+ORM class conti...
+-------------------
+how to ordering the objects/records?
+-----------------------------------
+	we can odering the records by using order_by() of objects manager
+
+	by default order_by() to return the objects in ascending order
+
+ex:
+---
+>>> for rec in employe.objects.all():
+          print(rec.eid,rec.ename,rec.esal,rec.dno,rec.active,rec.email)
+
+101 siva 2000.00 10 False siva@gmail.com
+102 rama 3000.00 20 True
+103 krishna 2500.00 30 False krishna@gmail.com
+104 dhoni 3500.00 10 True
+105 sachin 4000.00 30 False sachin@gmail.com
+106 dravid 2300.00 20 True dravid@gmail.com
+
+>>> for rec in employe.objects.all().order_by("esal"):
+          print(rec.eid,rec.ename,rec.esal,rec.dno,rec.active,rec.email)
+
+101 siva 2000.00 10 False siva@gmail.com
+106 dravid 2300.00 20 True dravid@gmail.com
+103 krishna 2500.00 30 False krishna@gmail.com
+102 rama 3000.00 20 True
+104 dhoni 3500.00 10 True
+105 sachin 4000.00 30 False sachin@gmail.com
+
+>>> for rec in employe.objects.all().order_by("-esal"):
+        print(rec.eid,rec.ename,rec.esal,rec.dno,rec.active,rec.email)
+
+105 sachin 4000.00 30 False sachin@gmail.com
+104 dhoni 3500.00 10 True
+102 rama 3000.00 20 True
+103 krishna 2500.00 30 False krishna@gmail.com
+106 dravid 2300.00 20 True dravid@gmail.com
+101 siva 2000.00 10 False siva@gmail.com
+
+how to performeing logical operations on the models?
+----------------------------------------------------
+	we can perform the logical operations on the models by using "Q" 
+
+ex:
+----
+>>> from django.db.models import Q
+>>> x=employe.objects.all()
+>>> for rec in x:
+...     print(rec.eid,rec.ename,rec.esal,rec.dno,rec.active,rec.email)
+...
+101 siva 2000.00 10 False siva@gmail.com
+102 rama 3000.00 20 True
+103 krishna 2500.00 30 False krishna@gmail.com
+104 dhoni 3500.00 10 True
+105 sachin 4000.00 30 False sachin@gmail.com
+106 dravid 2300.00 20 True dravid@gmail.com
+
+>>> for rec in x.filter(Q(dno=10) & Q(ename__startswith='s')):
+...     print(rec.eid,rec.ename,rec.esal,rec.dno,rec.active,rec.email)
+...
+101 siva 2000.00 10 False siva@gmail.com
+
+>>> for rec in x.filter(Q(dno=10) | Q(ename__startswith='s')):
+...     print(rec.eid,rec.ename,rec.esal,rec.dno,rec.active,rec.email)
+...
+101 siva 2000.00 10 False siva@gmail.com
+104 dhoni 3500.00 10 True
+105 sachin 4000.00 30 False sachin@gmail.com
+
+>>> for rec in x.filter(~Q(dno=10)):
+...     print(rec.eid,rec.ename,rec.esal,rec.dno,rec.active,rec.email)
+...
+102 rama 3000.00 20 True
+103 krishna 2500.00 30 False krishna@gmail.com
+105 sachin 4000.00 30 False sachin@gmail.com
+106 dravid 2300.00 20 True dravid@gmail.com
+
+how to update the objects/records?
+---------------------------------
+	we can update the objects by using update() of object manager
+
+	update(),to return the no.of records we are updated.
+
+>>> x=employe.objects.all()
+>>> for rec in x:
+...     print(rec.eid,rec.ename,rec.esal,rec.dno,rec.active,rec.email)
+...
+101 siva 2000.00 10 False siva@gmail.com
+102 rama 3000.00 20 True
+103 krishna 2500.00 30 False krishna@gmail.com
+104 dhoni 3500.00 10 True
+105 sachin 4000.00 30 False sachin@gmail.com
+106 dravid 2300.00 20 True dravid@gmail.com
+
+>>> x.filter(dno=10).update(esal=4000)
+2
+
+>>> y=employe.objects.all()
+>>> for rec in y:
+...     print(rec.eid,rec.ename,rec.esal,rec.dno,rec.active,rec.email)
+...
+101 siva 4000.00 10 False siva@gmail.com
+102 rama 3000.00 20 True
+103 krishna 2500.00 30 False krishna@gmail.com
+104 dhoni 4000.00 10 True
+105 sachin 4000.00 30 False sachin@gmail.com
+106 dravid 2300.00 20 True dravid@gmail.com
+
+
+>>> y.update(active=True)
+6
+
+>>> z=employe.objects.all()
+>>> for rec in z:
+...     print(rec.eid,rec.ename,rec.esal,rec.dno,rec.active,rec.email)
+...
+101 siva 4000.00 10 True siva@gmail.com
+102 rama 3000.00 20 True
+103 krishna 2500.00 30 True krishna@gmail.com
+104 dhoni 4000.00 10 True
+105 sachin 4000.00 30 True sachin@gmail.com
+106 dravid 2300.00 20 True dravid@gmail.com
+
+how to delete the objects/records?
+----------------------------------
+	we can delete the records/objects by using delete() of objects manager.
+
+	the delete() to return the no.of records we are deleted.
+
+>>> z=employe.objects.all()
+>>> for rec in z:
+         print(rec.eid,rec.ename,rec.esal,rec.dno,rec.active,rec.email)
+
+101 siva 4000.00 10 True siva@gmail.com
+102 rama 3000.00 20 True
+103 krishna 2500.00 30 True krishna@gmail.com
+104 dhoni 4000.00 10 True
+105 sachin 4000.00 30 True sachin@gmail.com
+106 dravid 2300.00 20 True dravid@gmail.com
+
+>>> z.filter(dno=10).delete()
+(2, {'app18.employe': 2})
+
+>>> a=employe.objects.all()
+>>> for rec in a:
+        print(rec.eid,rec.ename,rec.esal,rec.dno,rec.active,rec.email)
+
+102 rama 3000.00 20 True
+103 krishna 2500.00 30 True krishna@gmail.com
+105 sachin 4000.00 30 True sachin@gmail.com
+
+
+>>> a=employe.objects.all()
+>>> for rec in a:
+...     print(rec.eid,rec.ename,rec.esal,rec.dno,rec.active,rec.email)
+...
+102 rama 3000.00 20 True
+103 krishna 2500.00 30 True krishna@gmail.com
+105 sachin 4000.00 30 True sachin@gmail.com
+106 dravid 2300.00 20 True dravid@gmail.com
+
+>>> a.delete()
+(4, {'app18.employe': 4})
+
+>>> b=employe.objects.all()
+>>> for rec in b:
+...     print(rec.eid,rec.ename,rec.esal,rec.dno,rec.active,rec.email)
+...
+
+example:
+---------
+create django project to perform curd operations.
+
+step1:
+-----
+to create a project
+
+	django-admin startproject proj19
+
+step2:
+-----
+goto project location and create an application in that project
+
+	cd projectname
+
+	python manage.py startapp app19
+
+step3:
+-----
+to install our application in settings.py file of the project
+
+	settings.py
+	-----------
+INSTALLED_APPS = [
+    
+    'app19'
+]
+
+step4:
+-----
+to create a model in models.py file of the application
+
+	models.py
+	----------
+from django.db import models
+
+# Create your models here.
+class product(models.Model):
+    pid=models.IntegerField(primary_key=True)
+    pname=models.CharField(max_length=30)
+    pcost=models.DecimalField(max_digits=7,decimal_places=2)
+    pmfdt=models.DateField()
+    pexpdt=models.DateField()
+
+step5:
+-----
+to check the errors in our model
+
+	python manage.py check   
+
+step6:
+-----
+to apply the makemigrations
+
+	python manage.py makemigrations
+
+step7:
+-----
+to apply the migrate
+
+	python manage.py migrate
+

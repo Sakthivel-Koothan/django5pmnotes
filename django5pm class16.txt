@@ -1,0 +1,289 @@
+ex:
+---
+to implement the class based views by using get() and post()?
+
+step1:
+-----
+to create a project
+
+	django-admin startproject proj12
+
+step2:
+------
+goto project location and to create an application in that project location.
+
+	cd proj12
+
+	python manage.py startapp app12
+
+
+step3:
+-----
+to install our application in settings.py file
+
+	settings.py
+	-----------
+INSTALLED_APPS = [
+    
+    'app12'
+]
+
+step4:
+------
+to create a templates and to set the path for our templates in settings.py file.
+
+	settings.py
+	-----------
+TEMPLATES = [
+    {
+        
+        'DIRS': [os.path.join(BASE_DIR,'templates')],
+        
+    },
+]
+
+step5:
+------
+to create a views in views.py file of the application.
+
+	views.py
+	--------
+from django.shortcuts import render
+from django.views.generic import View
+from django.http import HttpResponse
+# Create your views here.
+class ginput(View):
+    def get(self,request):
+        return render(request,'app12/ginsert.html')
+class pinput(View):
+    def get(self,request):
+        return render(request,'app12/pinsert.html')
+
+class addition(View):
+    def get(self,request):
+        a=int(request.GET['fn'])
+        b=int(request.GET['sn'])
+        c=a+b
+        return HttpResponse("<h1>The Sum is: "+str(c)+"</h1>")
+    def post(self,request):
+        a=int(request.POST['fn'])
+        b=int(request.POST['sn'])
+        c=a+b
+        return HttpResponse("<h1>The Sum is: "+str(c)+"</h1>")
+        
+
+	app12/ginsert.html
+	------------------
+<!DOCTYPE htnl>
+<html>
+<body bgcolor="red">
+<form action="add">
+Enter First Number:<input type="text" name="fn"><br><br>
+Enter Second Number:<input type="text" name="sn"><br><br>
+<input type="submit" value="ADD">
+</form>
+</body>
+</html>
+
+
+	app12/pinsert.html
+	------------------
+<!DOCTYPE htnl>
+<html>
+<body bgcolor="powderblue">
+<form action="add" method="post">
+{% csrf_token %}
+Enter First Number:<input type="text" name="fn"><br><br>
+Enter Second Number:<input type="text" name="sn"><br><br>
+<input type="submit" value="ADD">
+</form>
+</body>
+</html>
+
+
+step6:
+------
+to configure the url patterns for views in urls.py file
+
+	urls.py
+	--------
+from django.contrib import admin
+from django.urls import path
+from app12.views import ginput,pinput,addition
+from django.conf.urls import url
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('gin/',ginput.as_view()),
+    path('pin/',pinput.as_view()),
+    url(r'add',addition.as_view())
+ ]
+
+step7:
+-----
+to apply the migrate
+
+	python manage.py migrate
+
+step8:
+------
+to start the server
+
+	python manage.py runserver
+
+step9:
+-----
+to send request to the server
+
+	http://127.0.0.1:8000/gin
+
+	http://127.0.0.1:8000/pin
+
+structure:
+----------
+	proj12
+	   |--->app12
+	   |      |--->views.py
+	   |--->proj12
+	   |      |--->urls.py
+	   |      |--->settings.py
+	   |--->templates
+	   |      |--->app12
+	   |      |      |--->ginsert.html
+	   |      |      |--->pinsert.html
+	   |--->manage.py
+
+
+
+example:
+-------
+by using both function based views and class based views in a single project?
+
+step1:
+----
+to create a project
+
+	django-admin startproject proj13
+
+step2:
+------
+goto project location,we are creating an application in that project location.
+
+	cd proj13
+
+	python manage.py startapp app13
+
+step3:
+-----
+to install our application in settings.py file of the project.
+
+	settings.py
+	-----------
+INSTALLED_APPS = [
+    
+    'app13'
+]
+
+step4:
+-----
+to create a templates and to set the path for our templates in settings.py file of the project.
+
+	settings.py
+	------------
+TEMPLATES = [
+    {
+        
+        'DIRS': [os.path.join(BASE_DIR,'templates')],
+     },
+]
+
+step5:
+------
+to create a views in views.py file of the application.
+
+	views.py
+	--------
+from django.shortcuts import render
+from datetime import datetime
+from django.views.generic import View
+# Create your views here.
+def dateandtime(request):
+    now=datetime.now()
+    return render(request,'time.html',{'today':now})
+
+class welcome(View):
+    def get(self,request):
+        return render(request,'wishes.html')
+
+
+    
+
+	time.html
+	---------
+<!DOCTYPE html>
+<html>
+<body bgcolor="powderblue">
+<h1>the cuurent System Date and Time is:{{today}}</h1>
+</body>
+</html>
+
+	wishes.html
+	-----------
+<!DOCTYPE html>
+<html>
+<body bgcolor="aqua">
+<h1>hello guys,welcome to Django world</h1>
+</body>
+</html>
+
+step6:
+-----
+to configure the url patterns for views in urls.py file.
+
+	urls.py
+	--------
+from django.contrib import admin
+from django.urls import path
+from app13.views import dateandtime,welcome
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('dt/',dateandtime),
+    path('wel/',welcome.as_view())
+]
+
+
+step7:
+-----
+to apply the migrate
+
+	python manage.py migrate
+
+step8:
+-------
+to start the server
+
+	python manage.py runserver
+
+step9:
+------
+to send the url request
+
+	http://127.0.0.1:8000/dt
+	
+	http://127.0.0.1:8000/wel
+
+structure:
+---------
+	proj13
+	   |--->app13
+	   |      |--->views.py
+	   |--->proj13
+           |      |--->settings.py
+	   |	  |--->urls.py
+	   |--->templates
+	   |      |--->time.html
+	   |      |--->wishes.html
+	   |--->manage.py
+
+
+

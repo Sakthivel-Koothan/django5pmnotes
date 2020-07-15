@@ -1,0 +1,193 @@
+example:
+-------
+write javascript program to check wheather given number is armstrong number or not?
+
+	armstrongornot.html	
+	-------------------
+<!doctype html>
+<html>
+<head>
+<script type="text/javascript" src="arm.js">
+</script>
+</head>
+<body>
+Enter any Number: <input id="no_input">
+<button onclick="armstr()">Check</button></br></br>
+</body>
+</html>
+
+	arm.js
+	------
+function armstr()
+{
+var s=0,num,temp,dig;
+num=Number(document.getElementById("no_input").value);
+
+temp=num;
+while(temp>0)
+{
+dig=temp%10;
+s=s+a*a*a;
+temp=parseInt(temp/10); // convert float into Integer
+}
+if(s==num)
+{
+alert("Armstrong number");
+}
+else
+{
+alert("Not Armstrong number");
+}
+}
+
+
+example
+-----
+write a javascript program to check wheather given number is palindrom number or not?
+
+	palindromornot.html
+	--------------------
+<!doctype html>
+<html>
+<head>
+<script type="text/javascript" src="pali.js">
+</script>
+</head>
+<body>
+Enter any Number: <input id="no_input">
+<button onclick="palin()">Check</button></br></br>
+</body>
+</html>
+
+	pali.js
+	-------
+function palin()
+{
+var rev=0,num,dig,temp;
+
+num=Number(document.getElementById("no_input").value);
+
+temp=num;
+while(num>0)
+{
+dig=num%10;
+rev=rev*10+dig;
+num=parseInt(num/10);
+}
+if(temp==rev)
+{
+alert("Palindrome number");
+}
+else
+{
+alert("Not Palindrome number");
+}
+}
+
+		Bootstrap
+		---------
+	a bootstrap is a most popular html,css and javascript framework for developing responsive  and mobile friendly websites.
+
+	bs.html
+	-------
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<link rel="stylesheet" type="text/css" href="mybase.css">
+</head>
+<body>
+<div class="jumbotron">
+  <h1 class="display-4">welcome to mywebsite</h1>
+  <p class="lead">This is a simple news portal website,here we will all kinds of news.</p>
+  <hr class="my-4">
+  
+  <a class="btn btn-primary btn-lg" href="#" role="button">Home</a>
+  <a class="btn btn-primary btn-lg" href="#" role="button">about</a>
+  <a class="btn btn-primary btn-lg" href="#" role="button">Movies</a>
+  <a class="btn btn-primary btn-lg" href="#" role="button">Political</a>
+  <a class="btn btn-primary btn-lg" href="#" role="button">Sports</a>
+  <a class="btn btn-primary btn-lg" href="#" role="button">Business</a>
+
+</div>
+
+	mybase.css
+	---------
+body{
+  background-image:url("https://images.unsplash.com/photo-1506485338023-6ce5f36692df?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=400&q=60");
+ background-repeat:no-repeat;
+ background-size:cover;
+}
+
+div{
+  text-align:center;
+  margin:50px;
+  padding:50px;
+   }
+
+
+
+what is framework?
+------------------
+	a framework is a semi-implemented application,it will provides good environment to design an applications.
+
+	which framework is suitable for developing web applications,that type of frameworks are called web application frameworks.
+
+	the python supported web application frameworks are: Django,Flask,Bottle,Web2py,Pylon,Tornado,pyramid,....
+
+
+			Django
+			------
+	django is a python related high-level web application framework,it makes easier to build the better web applications with lesscode and more quickly.
+
+
+history of Django?
+------------------
+	Django was developed by "adrian holovathy and simon wilision" in the year of 2003,but it announce django as a open source project in the year of 2005.
+
+	the name django was derivied from the world famous guitaris "Django Reinhardt".
+
+advantages of Django:
+---------------------
+1).Faster development
+2).less code
+3).more secure
+4).fully loaded
+5).scalable
+6).versatile
+
+features of Django:
+-------------------
+django follows MVT design pattern.
+django supports ORM(Object Relation Mapper).
+django provides builtin light-weight server is called        DDD(Django Development Server).
+django provides builtin database like sqlite3
+django provides customizable admin interface
+django supports customizable middleware services
+django provides great documentation
+
+note:
+-----
+django is a free and opensource,it is maintaned by DSF(Django Software Foundation) team.
+
+who uses Django framework:
+--------------------------
+	the most popular django related web applicatios ar
+
+		NASA
+		Pinterest
+		Instagram
+		Disqus
+		quora
+		bitbucket
+		washington DC news
+		mozilla
+		knight foundation
+		netflix,....
+
+
+
+
+
+		

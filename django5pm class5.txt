@@ -1,0 +1,307 @@
+Headers and Footers
+--------------------
+
+example:
+--------
+	htmlex1.html
+	------------
+<!DOCTYPE html>
+<html>
+<head>
+   <title>
+     headers and footer
+   </title>
+</head>
+<body>
+<header>
+<h1>www.sivapython.blogspot.com</h1>
+<p>in this site we are available all python related concepts</p>
+</header>
+
+
+<footer>
+<p>posted by Sivakrishna</p>
+<p>
+<address>IGlobal Technologies,plat no:210,secondfloor,annapurna block,adithya enclave</address>
+</p>
+<p>contact
+<a href="email">sivakrishna.python@gmail.com</a>
+</p>
+</footer>
+
+</body>
+</html>
+
+
+		CSS
+		----
+what is CSS?
+-----------
+CSS(Cascading Style Sheets) is a style sheet language,it will provides look and formating the html code.
+
+syntax:
+-------
+selector{
+       property:value;
+       property:value;
+	  ........
+	  ........
+     }
+
+
+
+
+example
+-------
+h1{
+   color:red;
+   font-size:13px;
+  }
+
+types of css selectors:
+-----------------------
+element selector
+id selector
+class selector
+
+how to add css?
+--------------
+	we can add css into html page in 3-ways
+
+1).inline css
+2).internal css
+3).external css
+
+example for inline css?
+----------------------
+	by using style attribute in our htmlelement/htmltag of body section of the htmlpage.
+
+
+<!DOCTYPE html>
+<html>
+<head>
+   <title>
+     inline css
+   </title>
+</head>
+<body bgcolor="aqua">
+<h1 style="color:red " align="center">welcome to Inline CSS</h1>
+<p style="color:blue">CSS is a style sheet language</p>
+</body>
+</html>
+
+example for internal css?
+--------------------------
+by using style tag in our head section of the html page
+
+
+<!DOCTYPE html>
+<html>
+<head>
+   <title>
+     internal css
+   </title>
+   <style>
+     h1{
+       color:red;
+       text-align:center;
+       font-size:50px;
+      }
+    p{
+      color:blue;
+      font-size:30px;
+      }
+   </style>
+</head>
+<body bgcolor="aqua">
+<h1>welcome to Internal CSS</h1>
+<p>CSS is a style sheet language</p>
+</body>
+</html>
+
+example for external css
+-------------------------
+	to create seperate css file and link that css file into our html page.
+
+
+	htmlex1.html
+	------------
+<!DOCTYPE html>
+<html>
+<head>
+   <title>
+     external css
+   </title>
+   <link rel="stylesheet" type="text/css" href="demo.css">     
+   
+</head>
+<body bgcolor="aqua">
+<h1>welcome to Inline CSS</h1>
+<p>CSS is a style sheet language</p>
+</body>
+</html>
+
+	demo.css
+	--------
+h1{
+    color:red;
+    text-align:center;
+    font-size:50px;
+    }
+
+p{
+  color:blue;
+  font-size:30px;
+  }
+
+
+
+simple project
+--------------
+	mysite.html
+	----------
+<html>
+<head>
+<title>My Website</title>
+<link rel="stylesheet" type="text/css" href="base.css" />
+</head>
+<body>
+<div id="container">
+<div id="header">
+<h1>welcome to My Website</h1>
+</div>
+<div id="content">
+<div id="nav">
+<h3>Navigation</h3>
+<ul>
+<li><a class="selected" href="">Home</a></li>
+<li><a href="#">About</a></li>
+<li><a href="#">Contact</a></li>
+</ul>
+</div>
+<div id="main">
+<h2>Home Page</h2>
+<div id="image" style="float:left;">
+        <img src="siva.jpg">
+</div>
+
+<div id="texts" style="float:left;"> 
+        <p>I'm Siva Krishna,Post Graduate in CSE.</p>
+</div>
+<br><br>
+<div id="texts" style="float:left;"> 
+        <p>working as a python professional and Trainer from last 5year on wards</p>
+</div>
+
+
+
+</div>
+</div>
+<div id="footer">
+<h3> Copyright &copy; Siva Krishna 2020</h3>
+</div>
+</div>
+</body>
+</html>
+
+
+	base.css
+	-------
+body {
+   background-color:powderblue;
+}
+
+h1,h2,h3 {
+   margin:0;
+}
+
+a {
+   text-decoration:none;
+   color:red;
+}
+
+#container {
+   background-color:white;
+   width:800px;
+   margin-left:auto;
+   margin-right:auto;
+}
+
+#header {
+   background-color:blue;
+   color:white;
+   text-align:center;
+   padding:10px;
+}
+
+#content {
+   padding:10px;
+}
+
+#nav {
+  width:180px;
+  float:left;
+}
+
+#nav ul {
+   list-style-type:none;
+   padding:0;
+}
+
+#nav .selected {
+   font-weight:bold;
+}
+
+#main {
+   width:600px;
+   float:right;
+}
+
+#main #image img{
+  alt:myimage;
+  width:140px;
+  height:140px;
+}
+
+#footer {
+    clear:both;
+    padding:10px;
+    background-color:gray;
+    color:white;
+    text-align:right;
+}
+
+
+example:
+--------
+	sample.html
+	-----------
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="mybase.css">
+</head>
+<body>
+<h1>welcome to mysite</h1>
+<p>in this site we are provide all online courses</p>
+</body>
+</html>
+
+	mybase.css
+	---------
+body{
+   background-image:url("https://images.unsplash.com/photo-1586964484161-648499ad1a19?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=400&q=60");
+   background-repeat:no-repeat;
+   background-size:cover;
+   }
+
+h1{
+   background-color:red;
+   color:black;
+   text-align:center;
+  }
+p{
+  background-color:blue;
+  color:red;
+  font-size:20px;
+  }
+  

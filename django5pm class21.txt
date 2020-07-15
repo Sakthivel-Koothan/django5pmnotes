@@ -1,0 +1,243 @@
+Django ORM
+-----------
+ORM(Object Relational Mapper)
+
+Django ORM provides an elegant and powerful way to interact with the database instead of writeing an sql queries.
+
+ORM describing how to access the data,manipulate the data and store the data into the database in object oriented fashion.
+
+by using ORM,we can perform CURD operations.
+
+	Create
+
+	Update
+
+	Retrieval
+	
+	Delete
+
+How to start Django shell?
+--------------------------
+	we can start the Django shell using the shell command
+
+		python manage.py shell
+
+Database Access through managers:-
+---------------------------------
+Django by default adds a manager called "objects" to every model class.
+
+The objects manager helps us to interact with the databse in complicated ways.
+
+The objects manager is the most common way Django developers interact with the database.
+
+>>> from app18.models import employe
+>>> employe.objects
+<django.db.models.manager.Manager object at 0x000001ED34867CC8>
+>>> type(employe.objects)
+<class 'django.db.models.manager.Manager'>
+
+	the objects manager provides some methods to perform the CURD operations.
+
+ex:
+----
+creating an object?
+
+>>> e1=employe(eid=101,ename="siva",esal=2000,dno=10,active=False,
+email="siva@gmail.com")
+>>> e1.save()
+
+>>> e2=employe(eid=102,ename="rama",esal=3000,dno=20)
+>>> e2.save()
+
+ex:
+----
+to create an objects by using create() of objects manager?
+
+>>> employe.objects.create(eid=103,ename="krishna",esal=2500,dno=30,active=False,email="krishna@gmail.com")
+<employe: employe object (103)>
+
+>>> employe.objects.create(eid=104,ename="dhoni",esal=3500,dno=10)
+<employe: employe object (104)>
+
+ex:
+---
+to create an objects by using bulk_create() of objects maanger?
+
+>>> employe.objects.bulk_create([employe(eid=105,ename="sachin",esal=4000,dno=30,active=False,email="sachin@gmail.com"),employe(eid=106,ename="dravid",esal=2300,dno=20,email="dravid@gmail.com")])
+
+[<employe: employe object (105)>, <employe: employe object (106)>]
+
+ex:
+---
+how to retreive the objects?
+
+	we can retreive the objects by using all() of objects manager
+
+	the all() to return the QuerySet object,QuerySet object is also same like as a list object in python.
+
+	QuerySet object dont supporting negative indexing
+
+
+>>> employe.objects.all()
+<QuerySet [<employe: employe object (101)>, <employe: employe object (102)>, <employe: employe object (103)>, <employe: employe object (104)>, <employe: employe object (105)>, <employe: employe object (106)>]>
+
+>>> employe.objects.all()[:2]
+<QuerySet [<employe: employe object (101)>, <employe: employe object (102)>]>
+
+>>> employe.objects.all()[2]
+<employe: employe object (103)>
+
+employe.objects.all()[-2]
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+  File "F:\django5pm\myvenv\lib\site-packages\django\db\models\query.py", line 293, in __getitem__
+    "Negative indexing is not supported."
+AssertionError: Negative indexing is not supported.
+
+we can retreive the records by using iteration
+>>> for rec in employe.objects.all():
+         print(rec.eid,rec.ename,rec.esal,rec.dno,rec.active,rec.email)
+
+101 siva 2000.00 10 False siva@gmail.com
+102 rama 3000.00 20 True
+103 krishna 2500.00 30 False krishna@gmail.com
+104 dhoni 3500.00 10 True
+105 sachin 4000.00 30 False sachin@gmail.com
+106 dravid 2300.00 20 True dravid@gmail.com
+
+
+ex:
+---
+how to get raw sql query for orm comand?
+
+>>> print(employe.objects.all().query)
+
+SELECT "app18_employe"."eid", "app18_employe"."ename", "app18_employe"."esal", "app18_employe"."dno", "app18_employe"."active", "app18_employe"."email" FROM "app18_employe"
+
+
+ex:
+---
+how to get the no.of objects/records?
+
+	we can get the no.of objects/records byn using count() of objects manager
+
+>>> employe.objects.count()
+6
+
+how to filter the records:
+-------------------------
+	we can filter the records by using filter() of objects manager.
+
+>>> for rec in employe.objects.all():
+...     print(rec.eid,rec.ename,rec.esal,rec.dno,rec.active,rec.email)
+...
+101 siva 2000.00 10 False siva@gmail.com
+102 rama 3000.00 20 True
+103 krishna 2500.00 30 False krishna@gmail.com
+104 dhoni 3500.00 10 True
+105 sachin 4000.00 30 False sachin@gmail.com
+106 dravid 2300.00 20 True dravid@gmail.com
+
+>>> for rec in employe.objects.filter(dno=10):
+...     print(rec.eid,rec.ename,rec.esal,rec.dno,rec.active,rec.email)
+...
+101 siva 2000.00 10 False siva@gmail.com
+104 dhoni 3500.00 10 True
+
+>>> for rec in employe.objects.all().filter(dno=10):
+...     print(rec.eid,rec.ename,rec.esal,rec.dno,rec.active,rec.email)
+...
+101 siva 2000.00 10 False siva@gmail.com
+104 dhoni 3500.00 10 True
+
+>>> for rec in employe.objects.all().filter(active=True):
+...     print(rec.eid,rec.ename,rec.esal,rec.dno,rec.active,rec.email)
+...
+102 rama 3000.00 20 True
+104 dhoni 3500.00 10 True
+106 dravid 2300.00 20 True dravid@gmail.com
+
+>>> for rec in employe.objects.all().filter(dno=10,active=True):
+...     print(rec.eid,rec.ename,rec.esal,rec.dno,rec.active,rec.email)
+...
+104 dhoni 3500.00 10 True
+
+>>> for rec in employe.objects.all().filter(dno=10,dno=20):
+...     print(rec.eid,rec.ename,rec.esal,rec.dno,rec.active,rec.email)
+  File "<console>", line 1
+SyntaxError: keyword argument repeated
+
+
+model field lookups:
+-------------------
+	we can apply the filter operation on model fields very deeply in that case we are using field lookups.
+
+syntax:
+-------
+	fieldname__lookuname
+
+
+>>> for rec in employe.objects.all():
+...     print(rec.eid,rec.ename,rec.esal,rec.dno,rec.active,rec.email)
+...
+101 siva 2000.00 10 False siva@gmail.com
+102 rama 3000.00 20 True
+103 krishna 2500.00 30 False krishna@gmail.com
+104 dhoni 3500.00 10 True
+105 sachin 4000.00 30 False sachin@gmail.com
+106 dravid 2300.00 20 True dravid@gmail.com
+
+>>> for rec in employe.objects.all().filter(dno=10):
+...     print(rec.eid,rec.ename,rec.esal,rec.dno,rec.active,rec.email)
+...
+101 siva 2000.00 10 False siva@gmail.com
+104 dhoni 3500.00 10 True
+
+>>> for rec in employe.objects.all().filter(dno=10,ename__contains='v'):
+...     print(rec.eid,rec.ename,rec.esal,rec.dno,rec.active,rec.email)
+...
+101 siva 2000.00 10 False siva@gmail.com
+
+>>> for rec in employe.objects.all().filter(dno=10,ename__startswith='s'):
+...     print(rec.eid,rec.ename,rec.esal,rec.dno,rec.active,rec.email)
+...
+101 siva 2000.00 10 False siva@gmail.com
+
+>>> for rec in employe.objects.all().filter(dno=10,ename__endswith='i'):
+...     print(rec.eid,rec.ename,rec.esal,rec.dno,rec.active,rec.email)
+...
+104 dhoni 3500.00 10 True
+
+>>> for rec in employe.objects.all().filter(ename__startswith='s'):
+...     print(rec.eid,rec.ename,rec.esal,rec.dno,rec.active,rec.email)
+...
+101 siva 2000.00 10 False siva@gmail.com
+105 sachin 4000.00 30 False sachin@gmail.com
+
+>>> for rec in employe.objects.all().filter(esal__gt=3000):
+...     print(rec.eid,rec.ename,rec.esal,rec.dno,rec.active,rec.email)
+...
+104 dhoni 3500.00 10 True
+105 sachin 4000.00 30 False sachin@gmail.com
+
+>>> for rec in employe.objects.all().filter(esal__gte=3000):
+...     print(rec.eid,rec.ename,rec.esal,rec.dno,rec.active,rec.email)
+...
+102 rama 3000.00 20 True
+104 dhoni 3500.00 10 True
+105 sachin 4000.00 30 False sachin@gmail.com
+
+>>> for rec in employe.objects.all().filter(esal__lt=3000):
+...     print(rec.eid,rec.ename,rec.esal,rec.dno,rec.active,rec.email)
+...
+101 siva 2000.00 10 False siva@gmail.com
+103 krishna 2500.00 30 False krishna@gmail.com
+106 dravid 2300.00 20 True dravid@gmail.com
+
+>>> for rec in employe.objects.all().filter(esal__lte=3000):
+...     print(rec.eid,rec.ename,rec.esal,rec.dno,rec.active,rec.email)
+...
+101 siva 2000.00 10 False siva@gmail.com
+102 rama 3000.00 20 True
+103 krishna 2500.00 30 False krishna@gmail.com
+106 dravid 2300.00 20 True dravid@gmail.com

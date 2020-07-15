@@ -1,0 +1,249 @@
+example for static files
+------------------------
+example:
+--------
+step1:
+------
+to create a project
+
+	django-admin startproject proj23
+
+step2:
+-----
+goto project location and to create an application in that project location
+
+	cd proj23
+
+	python manage.py startapp app23
+
+step3:
+------
+	to install our application in settings.py file of the project
+
+	settings.py
+	----------
+INSTALLED_APPS = [
+    
+    'app23'
+]
+
+step4:
+------
+	to create a templates and set the path for our templates in settings.py file.
+
+	settings.py
+	-----------
+TEMPLATES = [
+    {
+        
+        'DIRS': [os.path.join(BASE_DIR,'templates')],
+        
+    },
+]
+
+step5:
+-----
+	to create a static files and set the path for our static files in settings.py file.
+
+	settins.py
+	----------
+STATIC_URL = '/static/'
+
+STATICFILES_DIRS=[
+    os.path.join(BASE_DIR,'static')
+    ]
+
+
+step6:
+------
+	to create a view in views.py file of the application
+
+	views.py
+	--------
+from django.shortcuts import render
+
+# Create your views here.
+def welcome(request):
+    return render(request,'hello.html')
+
+
+	hello.html
+	----------
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+<link rel="stylesheet" href="{% static 'css/base.css' %}">
+<script type="text/javascript" src="{% static 'js/sample.js' %}">
+</script>
+</head>
+<body>
+<h1>welcome to Static Files</h1>
+<p>static files are css,javascript and images</p>
+<img src="{% static 'images/googleimage.png' %}">
+</body>
+</html>
+
+
+	base.css
+	--------
+body{
+   background-image:url("https://images.unsplash.com/photo-1594093453912-bc74ad28c9c9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60");
+   background-repeat:no-repeat;
+   background-size:cover;
+  }
+
+h1{
+   color:red;
+   text-align:center;
+   font-size:100px;
+   }
+
+p{
+  color:blue;
+  font-size:50px;
+  }
+	
+img{
+   height:50px;
+   width:75px;
+   }
+	
+	sample.js
+	----------
+alert("hello world");
+
+step7:
+-----
+to configure the url patterns for our views in urls.py file.
+
+	urls.py
+	-------
+from django.contrib import admin
+from django.urls import path
+from app23 import views
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('wel/',views.welcome)
+]
+
+step8
+----
+to apply the migrate
+
+	python manage.py migrate
+
+step9:
+------
+to start the server
+
+	python manage.py runserver
+
+step10:
+------
+to send the request to the server
+
+	http://127.0.0.1:8000/wel
+
+
+example for bootstrap project
+------------------------------
+step1:
+-----
+to create a project
+
+	django-admin startproject proj24
+
+step2:
+-----
+	goto project location and to create an application in that project location.
+
+	cd proj24
+
+	python manage.py startapp app24
+
+step3:
+------
+	to install our applicatiuon in settings.py file of the project
+
+	settings.py
+	-----------
+INSTALLED_APPS = [
+    
+    'app24'
+]
+
+step4:
+------
+to create a templates and to set the path for our templates in settings.py file.
+
+	settings.py
+	------------
+TEMPLATES = [
+    {
+        
+        'DIRS': [os.path.join(BASE_DIR,'templates')],
+        
+    },
+]
+
+
+step5:
+------
+to create static files and to set the path for our static files in settings.py file of the project.
+
+	settings.py
+	-----------
+STATIC_URL = '/static/'
+STATICFILES_DIRS=[
+    os.path.join(BASE_DIR,'static')
+    ]
+
+step6:
+------
+to create a view in views.py file of the application
+
+	views.py
+	---------
+from django.shortcuts import render
+
+# Create your views here.
+def welcome(request):
+    return render(request,'hello.html')
+
+
+step7:
+------
+to configure the url patterns for our views in urls.py file
+
+	urls.py
+	-------
+from django.contrib import admin
+from django.urls import path
+from app24 import views
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('wel/',views.welcome)
+]
+
+step8:
+-----
+to apply the migrate
+
+	python manage.py migrate
+
+step9:
+------
+to start the server
+
+	python manage.py runserver
+
+step10:
+-------
+to send the request to the server
+
+	http://127.0.0.1:8000/wel
+
+
+
+	

@@ -1,0 +1,152 @@
+		JavaScript
+		----------
+	JavaScript is a object-based scripting programming language.
+
+	it is a interpreted language
+
+	it is used to create interactive websites.
+
+applications of javascript:
+--------------------------
+	client-side validations
+	display the date and time
+	pop-up,alert messages
+	...
+	...
+
+we can implement the javascript code in 3-ways,they are
+
+	1).script tag in our html tag of body of the webpage
+		(inline javascript)/between the body tag
+                              
+
+	2).script tag in our head of the webpage
+		(internal javascript)/between the headtag
+
+	3).to create seperate javascript file
+			(external javascript)
+
+example for between the body tag:
+--------------------------------
+	js1.html
+	---------
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+<script>
+alert("hello world")
+</script>
+</body>
+</html>
+
+example for between the head tag:
+--------------------------------
+	js2.html
+	--------
+<!DOCTYPE html>
+<html>
+<head>
+<script type="text/javascript">
+function wishes()
+{
+ alert("hello world");
+}
+</script>
+</head>
+<body>
+<input type="button" value="clickme">
+<br><br>
+<input type="button" value="clickhere" onclick="wishes()">
+</body>
+</html>
+
+example for external javascript:
+--------------------------------
+	js3.html
+	---------
+<!DOCTYPE html>
+<html>
+<head>
+<script type="text/javascript" src="wishes.js">
+</script>
+</head>
+<body>
+<input type="button" value="clickme">
+<br><br>
+<input type="button" value="clickhere" onclick="wishes()">
+</body>
+</html>
+
+	wishes.js
+	----------
+function wishes()
+{
+ alert("hello world");
+}
+
+
+example:
+-------
+wap to perform addition of two numbers?
+
+		js4.html	
+		-------
+<!doctype html>
+<html>
+<head>
+<script>
+function add()
+{
+var a,b,c;
+a=Number(document.getElementById("first").value);
+b=Number(document.getElementById("second").value);
+c= a + b;
+document.getElementById("answer").value= c;
+}
+</script>
+</head>
+<body>
+first number
+<input id="first"> <br><br>
+second number
+<input id="second"> <br><br>
+
+<button onclick="add()">Add</button>
+<br><br>
+Result
+<input id="answer">
+</body>
+</html>
+
+example:
+---------
+write a program to check wheather given number is even or odd?
+
+	js5.html
+	--------
+<!doctype html>
+<html>
+<head>
+<script>
+function odd_even(){
+var no;
+no=Number(document.getElementById("no_input").value);
+if(no%2==0)
+{
+alert("Even Number");
+}
+else
+{
+alert("Odd Number");
+}
+}
+</script>
+</head>
+<body>
+Enter Any Number:<input id="no_input"><br />
+<button onclick="odd_even()">Click me</button>
+</body>
+</html>
+

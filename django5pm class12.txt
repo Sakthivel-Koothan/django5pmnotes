@@ -1,0 +1,115 @@
+ex:
+---
+to generate the url patterns by using url() function
+
+
+step1:
+------
+to create a project
+
+	django-admin startproject proj6
+
+step2:
+----
+goto project location and in that project location we are creating an application.
+
+	cd proj5
+
+	python manage.py startapp app6
+
+
+step3:
+------
+to install our application in settings.py file of the project
+
+	settings.py
+	------------
+INSTALLED_APPS = [
+    
+    'app6'
+]
+
+
+step4:
+-----
+to create a views in views.py file of the application
+
+	views.py
+	---------
+from django.shortcuts import render
+from django.http import HttpResponse
+# Create your views here.
+def morning(request):
+    return HttpResponse("<h1>hello good morning siva</h1>")
+
+def afternoon(request):
+    return HttpResponse("<h1>hello good afternoon siva</h1>")
+
+def evening(request):
+    return HttpResponse("<h1>hello good evening siva</h1>")
+
+def night(request):
+    return HttpResponse("<h1>hello good night siva</h1>")
+
+
+step5:
+------
+to configure the url patterns for our views in urls.py file
+
+	urls.py
+	--------
+from django.contrib import admin
+from django.urls import path
+from django.conf.urls import url
+from app6 import views
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('gm/',views.morning),
+    url('ga/',views.afternoon),
+    url(r'ge/',views.evening),
+    url(r'^gn/',views.night)
+    
+]
+
+step6:
+-----
+to apply the migrate
+
+	python manage.py migrate
+
+step7:
+----
+to start the server
+
+	python manage.py runserver
+
+step8:
+------
+to send the request to the server
+
+	http://127.0.0.1:8000/gm
+
+	http://127.0.0.1:8000/ga
+
+	http://127.0.0.1:8000/ge
+
+	http://127.0.0.1:8000/gn
+
+structure
+----------
+	proj6
+	   |--->app6
+	   |      |--->views.py
+	   |--->proj6
+	   |	  |--->settings.py
+	   |      |--->urls.py
+	   |--->manage.py
+
+
+
+
+
+
+
+

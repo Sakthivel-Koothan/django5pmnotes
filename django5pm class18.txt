@@ -1,0 +1,117 @@
+example:
+--------
+to create a django project with temeplate tags and filters?
+
+step1:
+------
+to create a project
+
+	django-admin startproject proj15
+
+step2:
+-----
+goto project location and to create an application in that project location.
+
+	cd proj15
+
+	python manage.py startapp app15
+
+step3:
+-----
+to install our application in settings.py file of the project.
+
+	settings.py
+	-----------
+INSTALLED_APPS = [
+    
+    'app15'
+]
+
+step4:
+-----
+to create a templates and set the path for our templates in settings.py file?
+
+	settings.py
+	-----------
+TEMPLATES = [
+    {
+        
+        'DIRS': [os.path.join(BASE_DIR,'templates')],
+      },
+]
+
+step5:
+------
+to create a views in views.py file of the application.
+
+	views.py
+	--------
+from django.shortcuts import render
+from datetime import datetime
+# Create your views here.
+def welcome(request):
+    dateandtime=datetime.now()
+    employe_names=["siva","rama","krishna"]
+    message="hai siva krishna good evening"
+    context={'now':dateandtime,'employees':employe_names,
+             'msg':message}
+    return render(request,'wel.html',context)
+
+
+	wel.html
+	--------
+<!DOCTYPE html>
+<html>
+<body bgcolor="powderblue">
+{# to check now object is created or not #}
+{% if now %}
+  <h2>the current system date and time is: {{now}}</h2>
+{% else %}
+  <h2>now object is not created</h2>
+{% endif %}
+
+{% comment %}
+take the one by one employe name from the employe names and to display the employe name first charecter must be uppercase.
+{% endcomment %}
+
+{% for i in employees %}
+	<p><h2>{{i|title}}</h2></p>
+{% endfor %}
+<hr>
+<h2>{{msg|title}}</h2>
+<h2>no.of words in a given string are: {{msg|wordcount}}</h2>
+<h2>{{msg|cut:" "}}</h2>
+</body>
+</html>
+
+step6:
+-----
+to configure the url patterns for views in urls.py file
+
+	urls.py
+	------
+from django.contrib import admin
+from django.urls import path
+from app15 import views
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('wel/',views.welcome)
+]
+
+step7:
+-----
+to apply migrate
+
+	python manage.py migrate
+
+step8:
+-----
+to start the server
+
+	python manage.py runserver
+
+step9:
+------
+to send the request to the server
+
+	http://127.0.0.1:8000/wel

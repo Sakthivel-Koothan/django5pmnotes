@@ -1,0 +1,101 @@
+what is web application?
+------------------------
+	a web application is a server-side program that utilizes web browsers and web technologies to perform a task over the web/internet.
+
+	the most of the web applications are implemented by using 3-tier architecture.
+
+	to draw the 3-tier architecture fig
+
+what are requirements to required developing an web applications?
+----------------------------------------------------
+1).Technologies
+2).IDE's
+3).Design pattern
+4).runtime environments
+
+Technologies:
+-------------
+	the technologies are can be categorized into 3-types,they are
+
+	1).client side technologies
+
+	2).server side technologies
+
+	3).database technologies
+
+client-side technologies:
+-------------------------
+	these technologies are used to build webpages and to perform the client-side validations.
+
+	these technologies are used to implement the presentation logics.
+
+	the client side technologies are
+
+		HTML
+		CSS
+		JAVA SCRIPT
+		....
+		....
+
+	we can executeing the client-side programs to required  web browsers.
+
+	the most popular web browsers are chrome,firefox,IE,safari,opera,....
+
+server-side technologies:
+-------------------------
+	these technologies are used to take the request from the client/enduser,process that request and give back the response to that request.
+
+	these technologies are used to implement the business logics and to perform a server-side validations.
+
+	the server side technologies are python,java,.net,php,ruby,....
+
+	we can execute the server-side programs to required middleware servers.
+
+	the middleware servers are                       apache tomcat,glasfish,WAS,IIS,DDS,....
+
+database technologies:
+---------------------
+	these technologies are used to implement the database logics(create,manipulate and delete).
+
+	SQL is the most common database technology/language
+
+	we can executeing database logics to required database servers.
+
+	the database servers are oracle,sqlite,mysql,sql server,teradata,DB2,postgresql,....
+
+
+
+IDE's
+-----
+	IDE's(Integrated Development Environment's) provides faster development of the application and to perform automatic debugging.
+
+	the most popular IDE's are  pycharm,atom,eclipse,netbeans,visualstudio,....
+
+
+architecture:
+-------------	
+	the most of the web applications are following MVC designpattern.
+
+	MVC(Model View Controller)
+
+	we can developing any web application by using MVC design pattern we will get some benefits,that benefits are
+
+	1).parallel development is possible
+
+	2).reduce the development time and development cost
+
+runtime environments:
+--------------------
+	we can run our project public domain in that case to required runtime environments.
+
+	the most popular runtime environments are heroku,pythonanywhere.com,cloud(aws,azure,gcp,...)
+
+
+
+
+
+
+
+
+	
+

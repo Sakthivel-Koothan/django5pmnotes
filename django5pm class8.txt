@@ -1,0 +1,197 @@
+Django architecture(MVT):
+------------------------
+	Whenever End-user sends the url request , that request is received by the url dispatcher.
+
+	Url dispatcher is a program that verifies wheather that given url is valid or not by communicating with "urls.py".
+
+	Whenever we are creating a project in Django framework then by default "urls.py" file is created in project folder.
+
+	We can define a url patterns by using a concept of Regular Expressions.
+
+	If the requested url is not matching with any one of the url pattern of "urls.py" file then url dispatcher gives an error.
+
+	Every url pattern of "urls.py" file should be registered with a view.
+
+	A view is a python function (or) python class which receives client request, process that request and gives the response to that request.
+
+	All view functions (or) view classes should be defines within the "views.py" file.
+
+	The "views.py" file is created automatically in application folder whenever we create an application in our project.
+
+	While processing the client request view can be communicating with database through the "models".
+
+	A model is a python class which represents tables in a database.
+
+	All model classes are created in "models.py" file of the application in our project
+
+	"models.py" file is created automatically in application folder whenever we create an application in our project.
+
+	After processing the client request by the view, the view can transfer the data to the template.
+
+	A template is a HTML file, in which  we can include the python code by using Template languages(DTL ,Jinja2)
+
+	Template language is a special language supported by Django framework.
+
+	By using  Template languages we can achieve html code reusability.
+
+	After including the data within template, template will be given to the browser before that template will be stored into the "cache framework".
+
+	Whenever same requests is received by the view then without processing that request cache template will be given to the browser (or) end- user.
+
+
+what is MVT?
+-------------
+Model	-->to represent the database logics
+	
+	a model is a python class,which is used to represent the database logics.
+
+View	-->to represent business logics
+
+	view is a python function or class,it takes the request from the end user,process that request and give back the reponse to the enduser.
+
+Template --> to reprsenting presentation logics
+
+	a template is nothing but a html file which we can include python code by using some template languages like(DTL,Jinja2)
+
+
+Django Environment setup:
+-------------------------
+1).python
+2).IDE's
+3).virtualenv
+4).Django
+
+
+what is virtualenv?
+-------------------
+	virtualenv is a tool,which is used to create a isolated python virtual environments.
+
+how to install virtualenv?
+--------------------------
+	pip install virtualenv
+
+how to create our own virtual environment?
+------------------------------------------
+	virtualenv  ourownvirtualenvironmentname
+
+ex:
+---
+	virtualenv myvenv
+
+how to activate our own virtual environment?
+-----------------------------------------
+	we can activate our own virtual environment by using following syntax
+
+	ourownvirtualenvironmentname\scripts\activate
+
+ex:
+---
+F:\django4pm>myvenv\scripts\activate
+
+(myvenv) F:\django4pm>
+
+
+how to deactivate our own virtual environment?
+-----------------------------------------
+	we can deactivate our own virtual environment by using following syntax
+
+	ourownvirtualenvironmentname\scripts\deactivate
+
+ex:
+----
+(myvenv) F:\django4pm>myvenv\scripts\deactivate
+F:\django4pm>
+
+	after activating our own virtual environment next we need to install django.
+
+how to install django?
+----------------------
+	we can install django by using following syntax
+
+	pip install django==versionnumber
+
+how to get django version?
+-------------------------
+	we can get the django version by using following syntax,
+
+	django-admin --version
+
+
+(myvenv) F:\django4pm>django-admin --version
+3.0.5
+
+how to create Django project?
+-----------------------------
+	we can create a djnago project by using following syntax,
+
+	django-admin startproject projectname
+
+ex:
+----
+(myvenv) F:\django4pm>django-admin startproject proj1
+
+
+__init__.py : we can treat any package as a python 	      package,that package contains compulssory               __init__.py file is required.
+
+asgi.py	    : asgi --> asynchronus gateway Interface
+	      to provides asynchronus communication between 	      web application and web server.
+
+wsgi.py     : wsgi --> webservice gateway interface
+
+	      to provides synchronus communication between web 	      application and web server.
+
+settings.py : in this file we can configure all the settings               of the project,like 
+
+		application settings,
+		template settings,
+		database settings,
+		static files settings,....
+
+
+urls.py     : we can configure url patterns for our views in 	              urls.py file
+
+manage.py   : manage.py is a one command-line utility,it will 	              provides some commands to interact with our 	              project and application,those commands are
+
+		startapp
+		runserver
+		migrate
+		makemigrations
+		shell
+		createsuperuser,...
+
+note:
+-----
+every project haveing minimum one application
+
+how to creating an application?
+----------------------------
+	goto project location by using following syntax
+
+	cd  projectname
+
+ex:
+----
+cd  proj1
+
+	python manage.py startapp appname
+
+ex:
+---
+python manage.py startapp app1
+
+
+__init__.py	: we can treat any package as a python 		                  package,that package should contain                  	 __init__.py file.
+    
+admin.py	: to display the models related information on 		  django admin pannel(we need to register our 		          model in admin.py file)
+
+apps.py		: we can configure application level settings
+
+models.py	: we can representing database related logics.
+
+tests.py	: we can write the unit testcases for testing 		          an application
+
+views.py	: we can representing the business logics.
+
+
+
+

@@ -1,0 +1,186 @@
+	Model Relationships
+	---------------------
+In RDBMS,we can maintain the relationships between the tables in 3-ways,they are
+	
+	1. Many-to-one relationship
+	2. Many-to-many relationships
+	3. One-to-one relationship
+
+
+Many-to-one relationship:
+-----------------------------
+	We can define many-to-one relationship we use django.db.models.ForeignKey
+
+	ForeignKey requires a positional argument the class to which the model is related.
+
+Syntax:
+	class Modelname(models.Model):
+		----------
+		----------
+		----------
+		author=models.ForeignKey(User,related_name=blog_posts')
+
+	This means an author may have multiple (or) many posts.
+
+Many-to-many relationships:
+---------------------------
+	We can define many-to-many relationship we use django.db.models.ManyToManyField
+
+	Ex:- class post(models.Model):
+			-----------
+			----------
+			-----------
+			Likes=models.ManyToManyField(User,related_name='likes')
+
+	This means a post has multiple likes from multiple authors.
+
+One-to-one relationship:
+----------------------- 
+	We can define one-to-one relationship we use django.db.models.OneToOneField
+
+	Ex:- class profile(models.Model):
+			----------
+			----------
+			----------
+			User=models.OneToOneField(User,on_delete=models.CASCADE)
+
+
+		Django Forms
+		------------
+	Django provides Forms,we can use these Forms instead of html forms.
+
+	Django Forms provides reusability of code and reduce the code.
+
+	Forms can be categorized into two types,they are
+
+	1).Normal Form
+
+	2).ModelForm
+
+Normal Form:
+-----------
+	a form is a class,any class which is extending by Form class of forms module.
+
+	we can creating a forms in forms.py file of the application.
+
+	forms.py file is not created automatically,we can create forms.py file manually in our application.
+
+
+ex:
+---
+step1:
+------
+to create a project
+
+	django-admin startproject proj20
+
+step2:
+-----
+goto project location and create an application in that project location.
+
+	cd proj19
+
+	python manage.py startapp app20
+
+step3:
+-----
+to install our application in settings.py file
+
+	settings.py
+	------------
+INSTALLED_APPS = [
+    
+    'app20'
+]
+
+
+step4:
+------
+to create a templates and to set the path for our templates in settings.py file
+
+	settings.py
+	----------
+TEMPLATES = [
+    {
+        
+        'DIRS': [os.path.join(BASE_DIR,'templates')],
+      },
+]
+
+step5:
+-----
+to create Form in forms.py file of the application
+
+	forms.py
+	--------
+from django import forms
+
+class student_form(forms.Form):
+    First_Name=forms.CharField(label="enter First Name:",max_length=20)
+    Last_Nmae=forms.CharField(label="enter Last Name:",max_length=20)
+    
+
+step6:
+------
+to create a view in views.py file of the application
+
+	views.py
+	--------
+from django.shortcuts import render
+from .forms import student_form
+from django.http import HttpResponse
+# Create your views here.
+def std_info(request):
+    std_obj=student_form()
+    return render(request,'student.html',{'obj':std_obj})
+
+def result(request):
+    return HttpResponse("form submitted successfully")
+
+
+	student.html
+	------------
+<!DOCTYPE html>
+<html>
+<body>
+<form action='insert'>
+{{ obj }}
+<input type="submit" value="insert">
+</form>
+</body>
+</html>
+
+step7:
+----
+to configure the url patterns for our views in urls.py file
+
+	urls.py
+	-------
+from django.contrib import admin
+from django.urls import path
+from django.conf.urls import url
+from app20 import views
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('sin/',views.std_info),
+    url(r'insert',views.result)
+]
+
+step8:
+-----
+to apply the migrate
+
+	python manage.py migrate
+
+step9:
+-------
+to start the server
+
+	python manage.py runserevr
+
+step10:
+------
+to send the request to the server
+
+	http://127.0.0.1:8000/sin
